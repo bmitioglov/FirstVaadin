@@ -1,31 +1,49 @@
 package com.example.firstvaadin;
 
-import java.io.File;
 
-import com.vaadin.data.util.FilesystemContainer;
+
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.ComboBox;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
 
-
+import com.vaadin.ui.*;
 
 @SuppressWarnings("serial")
 public class FirstvaadinUI extends UI {
 	
 	
-	FilesystemContainer docs = new FilesystemContainer(new File("C:/Program files/"));
-	private ComboBox doclist = new ComboBox("Documents111", docs);
+	private ComboBox doclist = new ComboBox("Documents");
 	VerticalLayout vlay = new VerticalLayout();
+	MyComposite mycomp = new MyComposite();
+	private Button button1 = new Button("Mybutton");
+	VerticalLayout vlayButton = new VerticalLayout();
+	HorizontalLayout hlay = new HorizontalLayout();
+	VerticalSplitPanel split = new VerticalSplitPanel();
+	Label label = new Label();
+	private PopupDateField datefield = new PopupDateField();
 	
 	@Override
 	protected void init(VaadinRequest request) {
+		
+		this.getPage().setTitle("SCADAReporter");
 		vlay.addComponent(doclist);
-		this.setContent(vlay);
+		
+		hlay.addComponent(button1);
+		hlay.addComponent(datefield);
+		
+		split.addComponent(vlay);
+		split.addComponent(hlay);
+		split.setMaxSplitPosition(95, Unit.PERCENTAGE);
+		split.setMinSplitPosition(95, Unit.PERCENTAGE);
+		
+		
+		this.setContent(split);
+		
+		/*button1.addClickListener(new ClickListener() {
+            public void buttonClick(ClickEvent event) {
+                label = new Label("NewLabel!");
+            	vlayButton.addComponent(label);
+            		
+            }
+    });*/
 		
 	}
-
 }
